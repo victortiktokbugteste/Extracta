@@ -61,7 +61,7 @@ npm run tsc
 npm start
 ```
 
-4. Acesse a aplicação em `http://localhost:3000` ou `https:\\extracta.azurewebsites.net`
+4. Acesse a aplicação em `http://localhost:3000` ou `https://extracta.azurewebsites.net`
 
 ## Fluxo de Trabalho
 
