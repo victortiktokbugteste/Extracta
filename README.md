@@ -36,7 +36,7 @@ Seguros Zurich/
 
 ## Pré-requisitos
 
-- Node.js (versão 10 ou superior)
+- Node.js (versão 22 ou superior)
 - npm (gerenciador de pacotes do Node.js)
 
 ## Instalação
@@ -51,12 +51,17 @@ git clone [URL_DO_REPOSITÓRIO]
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+3. Execute o run do TypeScript:
+```
+npm run tsc
+```
+
+4. Inicie o servidor de desenvolvimento:
 ```
 npm start
 ```
 
-4. Acesse a aplicação em `http://localhost:3000`
+4. Acesse a aplicação em `http://localhost:3000` ou `https:\\extracta.azurewebsites.net`
 
 ## Fluxo de Trabalho
 
