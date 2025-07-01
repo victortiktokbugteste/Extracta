@@ -1,0 +1,41 @@
+<div class="jumbotron">
+    <h1 class="text-center">Login</h1>
+    <hr />
+    <div class="alert alert-success" role="alert" *ngIf="sucesso">
+        Login realizado com sucesso!
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="exibirErro">
+        {{mensagemErro}}
+    </div>
+
+    <div *ngIf="hasErros()" class="alert alert-danger">
+        <ul>
+            <li *ngIf="!loginForm.controls['usuario'].valid 
+            && !loginForm.controls['usuario'].pristine">
+                Digite um email válido
+            </li>
+            <li *ngIf="!loginForm.controls['senha'].valid 
+            && !loginForm.controls['senha'].pristine">
+                Digite uma senha
+            </li>
+        </ul>
+    </div>
+
+    <form *ngIf="!sucesso" (ngSubmit)="enviar()" [ngFormModel]="loginForm">
+        <div class="form-group" [class.has-error]="!loginForm.controls['usuario'].valid && !loginForm.controls['usuario'].pristine">
+            <label class="control-label" for="usuario">Usuário - (testes: teste@gmail.com)</label>
+            <input type="text" class="form-control" name="usuario" id="usuario" placeholder="Digite seu email" [(ngModel)]="usuario" ngControl="usuario">
+        </div>
+        <div class="form-group"
+        [class.has-error]="!loginForm.controls['senha'].valid 
+        && !loginForm.controls['senha'].pristine">
+            <label class="control-label" for="senha">Senha - (testes:1234)</label>
+            <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua senha" [(ngModel)]="senha" ngControl="senha">
+        </div>
+        <hr />
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Entrar</button>
+        </div>
+    </form>
+</div>

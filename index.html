@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <title>Sistema de Sinistros</title>
+
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <base href="/">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="node_modules/es6-shim/es6-shim.js"></script>
+        <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+        <script src="node_modules/systemjs/dist/system.js"></script>
+        <script src="node_modules/rxjs/bundles/Rx.js"></script>
+        <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+        <script src="node_modules/angular2/bundles/http.dev.js"></script>
+        <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
+        <style>
+            .modal-container {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1050;
+                overflow-x: hidden;
+                overflow-y: auto;
+                outline: 0;
+                padding: 30px 0;
+            }
+            
+            .modal-backdrop {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1040;
+                background-color: #000;
+                opacity: 0.5;
+            }
+            
+            .modal-dialog {
+                position: relative;
+                width: auto;
+                margin: 10px auto;
+                z-index: 1050;
+                max-width: 500px;
+            }
+            
+            .modal-content {
+                position: relative;
+                background-color: #fff;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                border-radius: 6px;
+                box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+                background-clip: padding-box;
+                outline: 0;
+                display: flex;
+                flex-direction: column;
+                max-height: calc(100vh - 60px);
+            }
+            
+            .modal-body {
+                position: relative;
+                padding: 15px;
+                overflow-y: auto;
+                flex: 1 1 auto;
+                max-height: calc(100vh - 170px);
+            }
+            
+            .modal-header, .modal-footer {
+                padding: 15px;
+                background-color: #f5f5f5;
+                flex: 0 0 auto;
+            }
+            
+            .modal-header {
+                border-bottom: 1px solid #e5e5e5;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+            }
+            
+            .modal-footer {
+                border-top: 1px solid #e5e5e5;
+                text-align: right;
+                border-bottom-left-radius: 6px;
+                border-bottom-right-radius: 6px;
+            }
+            
+            @media (min-width: 768px) {
+                .modal-dialog {
+                    width: 600px;
+                    margin: 30px auto;
+                }
+                
+                .modal-dialog.modal-lg {
+                    width: 800px;
+                }
+            }
+            
+            body.modal-open {
+                overflow: hidden;
+            }
+            
+            /* Estilos adicionais para garantir que o modal seja exibido corretamente */
+            .panel {
+                margin-bottom: 15px;
+            }
+            
+            .panel-body {
+                padding: 15px;
+            }
+            
+            .form-group:last-child {
+                margin-bottom: 0;
+            }
+        </style>
+
+            <script>
+                System.config({
+                    packages: {
+                        app: {
+                            format: 'register',
+                            defaultExtension: 'js'
+                        }
+                    }
+                });
+                System.import('app/boot').then(null, console.error.bind(console));
+            </script>
+    </head>
+    <body class="container">     
+        <my-app>Loading...</my-app>
+    </body>
+</html>

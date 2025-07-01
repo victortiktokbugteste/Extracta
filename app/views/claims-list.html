@@ -1,0 +1,107 @@
+<div class="container">
+    <h1 class="text-center">Lista de Sinistros</h1>
+    <hr />
+
+    <div class="alert alert-danger" role="alert" *ngIf="mensagemErro">
+        {{mensagemErro}}
+    </div>
+
+    <div *ngIf="carregando" class="text-center">
+        <p>Carregando sinistros...</p>
+    </div>
+
+    <!-- Filtro de dados -->
+    <div class="panel panel-default" *ngIf="!carregando">
+        <div class="panel-heading">
+            <h3 class="panel-title">Filtrar sinistros</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="insuredName">Segurado</label>
+                        <input type="text" class="form-control" id="insuredName" [(ngModel)]="filtro.insuredName" placeholder="Nome do segurado">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="insuredCpf">CPF</label>
+                        <input type="text" class="form-control" id="insuredCpf" [(ngModel)]="filtro.insuredCpf" placeholder="CPF do segurado">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="branch">Marca</label>
+                        <input type="text" class="form-control" id="branch" [(ngModel)]="filtro.branch" placeholder="Marca do veículo">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="model">Modelo</label>
+                        <input type="text" class="form-control" id="model" [(ngModel)]="filtro.model" placeholder="Modelo do veículo">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary" (click)="pesquisar()">
+                        <span class="glyphicon glyphicon-search"></span> Pesquisar
+                    </button>
+                    <button class="btn btn-default" (click)="limparFiltro()" style="margin-left: 10px;">
+                        <span class="glyphicon glyphicon-refresh"></span> Limpar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!carregando && claims.length === 0" class="alert alert-info">
+        Nenhum sinistro encontrado.
+    </div>
+
+    <div *ngIf="!carregando" class="clearfix" style="margin-bottom: 15px;">
+        <div class="pull-right">
+            <button class="btn btn-success" (click)="gerarRelatorio()" style="margin-right: 10px;">
+                <span class="glyphicon glyphicon-stats"></span> Gerar Relatório
+            </button>
+            <button class="btn btn-primary" (click)="abrirModalCriacaoSinistro()">
+                <span class="glyphicon glyphicon-plus"></span> Criar sinistro
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="!carregando && claims.length > 0">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Data de Criação</th>
+                    <th>Segurado</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Valor do Seguro</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#claim of claims">
+                    <td>{{formatarData(claim.createDate)}}</td>
+                    <td>{{claim.insured.name}}</td>
+                    <td>{{claim.vehicle.branch}}</td>
+                    <td>{{claim.vehicle.model}}</td>
+                    <td>{{formatarMoeda(claim.claimValue)}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="editarSinistro(claim.id)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-sm btn-danger" (click)="excluirSinistro(claim.id)" style="margin-left: 5px;">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <modal-dialog (onConfirm)="confirmarExclusao()"></modal-dialog>
+    <create-claim-modal (onSave)="onSinistroSalvo()"></create-claim-modal>
+</div> 

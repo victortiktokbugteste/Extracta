@@ -1,0 +1,93 @@
+<div class="modal-container" [style.display]="visivel ? 'block' : 'none'">
+    <div class="modal-backdrop" *ngIf="visivel" (click)="fechar()"></div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="fechar()" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">{{titulo}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info" *ngIf="salvando">
+                    <span class="glyphicon glyphicon-refresh"></span> {{modoEdicao ? 'Carregando sinistro...' : 'Salvando sinistro...'}}
+                </div>
+                
+                <form [ngFormModel]="sinistroForm" *ngIf="!salvando">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Dados do Segurado</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group" [class.has-error]="!sinistroForm.controls['nome'].valid && !sinistroForm.controls['nome'].pristine">
+                                <label class="control-label" for="nome">Nome do segurado</label>
+                                <input type="text" class="form-control" id="nome" [(ngModel)]="segurado.name" ngControl="nome" placeholder="Digite o nome do segurado">
+                                <span class="help-block" *ngIf="!sinistroForm.controls['nome'].valid && !sinistroForm.controls['nome'].pristine">
+                                    O nome do segurado é obrigatório
+                                </span>
+                            </div>
+                            <div class="form-group" [class.has-error]="!sinistroForm.controls['cpf'].valid && !sinistroForm.controls['cpf'].pristine">
+                                <label class="control-label" for="cpf">CPF</label>
+                                <input type="text" class="form-control" id="cpf" [(ngModel)]="segurado.cpf" ngControl="cpf" placeholder="Digite o CPF do segurado">
+                                <span class="help-block" *ngIf="!sinistroForm.controls['cpf'].valid && !sinistroForm.controls['cpf'].pristine">
+                                    O CPF é obrigatório
+                                </span>
+                            </div>
+                            <div class="form-group" [class.has-error]="!sinistroForm.controls['dataNascimento'].valid && !sinistroForm.controls['dataNascimento'].pristine">
+                                <label class="control-label" for="dataNascimento">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="dataNascimento" [(ngModel)]="segurado.dateOfBirth" ngControl="dataNascimento">
+                                <span class="help-block" *ngIf="!sinistroForm.controls['dataNascimento'].valid && !sinistroForm.controls['dataNascimento'].pristine">
+                                    A data de nascimento é obrigatória
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Dados do Veículo</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group" [class.has-error]="!sinistroForm.controls['marca'].valid && !sinistroForm.controls['marca'].pristine">
+                                <label class="control-label" for="marca">Marca</label>
+                                <input type="text" class="form-control" id="marca" [(ngModel)]="veiculo.branch" ngControl="marca" placeholder="Digite a marca do veículo">
+                                <span class="help-block" *ngIf="!sinistroForm.controls['marca'].valid && !sinistroForm.controls['marca'].pristine">
+                                    A marca do veículo é obrigatória
+                                </span>
+                            </div>
+                            <div class="form-group" [class.has-error]="!sinistroForm.controls['modelo'].valid && !sinistroForm.controls['modelo'].pristine">
+                                <label class="control-label" for="modelo">Modelo</label>
+                                <input type="text" class="form-control" id="modelo" [(ngModel)]="veiculo.model" ngControl="modelo" placeholder="Digite o modelo do veículo">
+                                <span class="help-block" *ngIf="!sinistroForm.controls['modelo'].valid && !sinistroForm.controls['modelo'].pristine">
+                                    O modelo do veículo é obrigatório
+                                </span>
+                            </div>
+                            <div class="form-group" [class.has-error]="!sinistroForm.controls['valor'].valid && !sinistroForm.controls['valor'].pristine">
+                                <label class="control-label" for="valor">Valor</label>
+                                <input type="number" class="form-control" id="valor" [(ngModel)]="veiculo.value" ngControl="valor" placeholder="Digite o valor do veículo">
+                                <span class="help-block" *ngIf="!sinistroForm.controls['valor'].valid && !sinistroForm.controls['valor'].pristine">
+                                    O valor do veículo é obrigatório
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="alert alert-danger" *ngIf="errosValidacao && errosValidacao.length > 0">
+                    <ul>
+                        <li *ngFor="#erro of errosValidacao">
+                            {{erro.field}}: {{erro.message}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="fechar()" [disabled]="salvando">Fechar</button>
+                <button type="button" class="btn btn-primary" [disabled]="!sinistroForm.valid || salvando" (click)="salvar()">
+                    <span *ngIf="salvando" class="glyphicon glyphicon-refresh"></span>
+                    {{modoEdicao ? 'Atualizar' : 'Salvar'}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div> 
