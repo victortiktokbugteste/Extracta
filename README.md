@@ -56,7 +56,7 @@ npm install
 npm start
 ```
 
-4. Acesse a aplicação em `http://localhost:4200`
+4. Acesse a aplicação em `http://localhost:3000`
 
 ## Fluxo de Trabalho
 
