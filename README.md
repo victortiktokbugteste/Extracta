@@ -67,4 +67,4 @@ npm start
 
 ## Autores
 
-- Equipe de Desenvolvimento Seguros Zurich 
+- VICTOR GABRIEL RODRIGUES LIMA
